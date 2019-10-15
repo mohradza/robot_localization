@@ -1,0 +1,34 @@
+<launch>
+  <include file="$(find z_state_estimator)/launch/estimator.launch"/>
+
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find robot_localization)/params/ekf_2xradar_imu_tera.yaml" />
+<param name ="/use_sim_time" value="true"/>
+    <!--  Placeholder for output topic remapping -->
+    <remap from="imu/filtered" to="/imu_raw"/>
+    <remap from="velocity/filtered" to="/mmWaveDataHdl/vel"/>
+    <remap from="velocity1/filtered" to="/mmWaveDataHdl1/vel"/>
+    <remap from="velocity2/filtered" to="/z_state_estimator/twist"/>
+
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="radartf" args="0 0 0 0.0 0.0 0.0 /base_link /radar_link_0  100">
+    <param name ="/use_sim_time" value="true"/>
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="radartf1" args="0 0 0 1.5708 0.0 0 /base_link /radar_link_1  100">
+    <param name ="/use_sim_time" value="true"/>
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="imutf" args="0 0 0 3.14 0.0 3.14 /base_link /3dm_gx5_15  100">
+    <param name ="/use_sim_time" value="true"/>
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="zveltf" args="0 0 0 0 0.0 0 /base_link /z_est_frame  100">
+    <param name ="/use_sim_time" value="true"/>
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="worldtf" args="0 0 0 0 0.0 0 /world /odom  100">
+    <param name ="/use_sim_time" value="true"/>
+  </node>
+</launch>
