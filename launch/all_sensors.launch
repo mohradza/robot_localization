@@ -1,0 +1,17 @@
+<!--
+  This file will launch multiple Radar devices and Goggles velocity estimators in separate namespaces
+ -->
+
+<launch>
+
+  <include file="$(find ti_mmwave_rospkg)/launch/multiradar.launch"/>
+
+  <include file="$(find microstrain_driver)/launch/3dm_gx5_15.launch"/>
+
+  <node pkg="teraranger" type="evo" name="teraranger_node" output="screen"/>
+
+  <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
+
+  <include file="$(find ti_mmwave_rospkg)launch/rig_transforms.launch"/>
+
+</launch>
