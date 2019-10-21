@@ -6,7 +6,7 @@
   <node pkg="tf2_ros" type="static_transform_publisher" name="radar1_base_tf" args="0.0015 -.07 0.0015 -1.5708 0 -1.5708 base_link radar_1_link"/>
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="tera_base_tf" args="0 0 -.06 0 0 0 /base_link /base_range"/>
- 
+
   <node pkg="tf2_ros" type="static_transform_publisher" name="imu_base_tf" args="0 0 0 3.14159 0 3.14159 /base_link /3dm_gx5_15"/>
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="rplidar_base_tf" args="0 0 0.06 0 0 0 /base_link /laser"/>
