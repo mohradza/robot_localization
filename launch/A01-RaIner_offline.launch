@@ -1,0 +1,15 @@
+<launch>
+
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find robot_localization)/params/A01-RaIner_2xradar_imu_offline.yaml" />
+    <param name ="/use_sim_time" value="true"/>
+    <!--  Placeholder for output topic remapping -->
+    <remap from="imu/filtered" to="/imu_raw"/>
+    <remap from="velocity/filtered" to="/mmWaveDataHdl/vel"/>
+    <remap from="velocity1/filtered" to="/mmWaveDataHdl1/vel"/>
+  </node>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="radar0_base_tf" args=".11 0.0 -.09 0 0 3.14159 /base_link radar_link_0"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="radar1_base_tf" args="0.0 -.075 -0.04 -1.57078 0 3.14159 base_link radar_link_1"/>
+
+</launch>

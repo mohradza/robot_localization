@@ -36,7 +36,7 @@ debug: false
 debug_out_file: /path/to/debug/file.txt
 
 # Whether to broadcast the transformation over the /tf topic. Defaults to true if unspecified.
-publish_tf: false
+publish_tf: true
 
 # Whether to publish the acceleration state. Defaults to false if unspecified.
 publish_acceleration: false
@@ -60,10 +60,10 @@ publish_acceleration: false
 #     3a. Set your "world_frame" to your map_frame value
 #     3b. MAKE SURE something else is generating the odom->base_link transform. Note that this can even be another state
 #         estimation node from robot_localization! However, that instance should *not* fuse the global data.
-map_frame: map              # Defaults to "map" if unspecified
+#map_frame: map              # Defaults to "map" if unspecified
 odom_frame: odom            # Defaults to "odom" if unspecified
 base_link_frame: base_link  # Defaults to "base_link" if unspecified
-world_frame: map           # Defaults to the value of odom_frame if unspecified
+world_frame: odom           # Defaults to the value of odom_frame if unspecified
 
 
 twist0: velocity/filtered
@@ -73,34 +73,22 @@ twist0_config: [false, false, false,
                 false, false, false,
                 false, false, false]
 
-twist0_queue_size: 10
+twist0_queue_size: 1
 twist0_rejection_threshold: 2
 twist0_nodelay: false
 twist0_relative: false
 
-twist1: velocity1/filtered
-twist1_config: [false, false, false,
-                false, false, false,
-                true,  true,  true,
-                false, false, false,
-                false, false, false]
-
-twist1_queue_size: 10
-twist1_rejection_threshold: 2
-twist1_nodelay: false
-twist1_relative: false
-
-twist2: velocity2/filtered
-twist2_config: [false, false, false,
-                false, false, false,
-                false, false,  true,
-                false, false, false,
-                false, false, false]
-
-twist2_queue_size: 10
-twist2_rejection_threshold: 2
-twist2_nodelay: false
-twist2_relative: false
+#twist1: velocity1/filtered
+#twist1_config: [false, false, false,
+#false, false, false,
+                #true,  true,  true,
+                #false, false, false,
+                #                false, false, false]
+       
+#twist1_queue_size: 10
+#twist1_rejection_threshold: 2
+#twist1_nodelay: false
+#twist1_relative: false
 
 imu0: imu/filtered
 imu0_config: [false, false, false,
@@ -110,25 +98,15 @@ imu0_config: [false, false, false,
               true,  true,  true]
 imu0_nodelay: false
 imu0_differential: false
-imu0_relative: false
-imu0_queue_size: 5
+imu0_relative: true
+imu0_queue_size: 10
 imu0_pose_rejection_threshold: 0.8                 # Note the difference in parameter names
 imu0_twist_rejection_threshold: 0.8                #
 imu0_linear_acceleration_rejection_threshold: 0.8  #
-imu0_remove_gravitational_acceleration: true
 
-odom0: odom/filtered
-odom0_config: [false, false, false,
-               false, false, true,
-               false, false, false,
-               false, false, false,
-               false, false, false]
-odom0_differential: false
-odom0_relative: false
-odom0_queue_size: 30
-odom0_pose_rejection_threshold: 2
-odom0_twist_rejection_threshold: 0.2
-odom0_nodelay: false
+# [ADVANCED] Some IMUs automatically remove acceleration due to gravity, and others don't. If yours doesn't, please set
+# this to true, and *make sure* your data conforms to REP-103, specifically, that the data is in ENU frame.
+imu0_remove_gravitational_acceleration: true
 
 # [ADVANCED]  The EKF and UKF models follow a standard predict/correct cycle. During prediction, if there is no
 # acceleration reference, the velocity at time t+1 is simply predicted to be the same as the velocity at time t. During
@@ -151,9 +129,10 @@ control_timeout: 0.2
 # Which velocities are being controlled. Order is vx, vy, vz, vroll, vpitch, vyaw.
 control_config: [true, false, false, false, false, true]
 # Places limits on how large the acceleration term will be. Should match your robot's kinematics.
-acceleration_limits: [1.3, 0.0, 0.0, 0.0, 0.0, 3.4]
+acceleration_limits: [1.3, 1.3, .65, 3.4, 3.4, 3.4]
+#acceleration_limits: [1.3, 1.3, .65, 3.4, 3.4, 3.4]
 # Acceleration and deceleration limits are not always the same for robots.
-deceleration_limits: [1.3, 0.0, 0.0, 0.0, 0.0, 4.5]
+deceleration_limits: [1.3, 1.3, .65, 3.4, 3.4, 4.5]
 # If your robot cannot instantaneously reach its acceleration limit, the permitted change can be controlled with these
 # gains
 acceleration_gains: [0.8, 0.0, 0.0, 0.0, 0.0, 0.9]
