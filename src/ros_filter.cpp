@@ -2379,6 +2379,7 @@ namespace RobotLocalization
                                                                 msg->header.stamp,
                                                                 tfTimeout_,
                                                                 targetFrameTrans);
+    
 
     if (canTransform)
     {
@@ -2418,6 +2419,8 @@ namespace RobotLocalization
             curAttitude.normalize();
           }
         }
+        accTmp = targetFrameTrans.getBasis() * accTmp;
+        maskAcc = targetFrameTrans.getBasis() * maskAcc;
         trans.setRotation(curAttitude);
         tf2::Vector3 rotNorm = trans.getBasis().inverse() * normAcc;
         accTmp.setX(accTmp.getX() - rotNorm.getX());
@@ -2437,8 +2440,8 @@ namespace RobotLocalization
       // accTmp = targetFrameTrans.getBasis() * accTmp - targetFrameTrans.getOrigin().cross(rotation_acceleration);
       // We can get rotational acceleration by differentiating the rotational velocity
       // (if it's available)
-      accTmp = targetFrameTrans.getBasis() * accTmp;
-      maskAcc = targetFrameTrans.getBasis() * maskAcc;
+      //accTmp = targetFrameTrans.getBasis() * accTmp;
+      //maskAcc = targetFrameTrans.getBasis() * maskAcc;
 
       // Now use the mask values to determine which update vector values should be true
       updateVector[StateMemberAx] = static_cast<int>(

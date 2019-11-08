@@ -25,7 +25,7 @@ transform_timeout: 0.0
 
 # If you're having trouble, try setting this to true, and then echo the /diagnostics_agg topic to see if the node is
 # unhappy with any settings or data.
-print_diagnostics: true
+print_diagnostics: false
 
 # Debug settings. Not for the faint of heart. Outputs a ludicrous amount of information to the file specified by
 # debug_out_file. I hope you like matrices! Please note that setting this to true will have strongly deleterious
@@ -33,7 +33,7 @@ print_diagnostics: true
 debug: false
 
 # Defaults to "robot_localization_debug.txt" if unspecified. Please specify the full path.
-debug_out_file: /path/to/debug/file.txt
+debug_out_file: /home/ohrad/rl_debug/file.txt
 
 # Whether to broadcast the transformation over the /tf topic. Defaults to true if unspecified.
 publish_tf: true
@@ -74,7 +74,7 @@ twist0_config: [false, false, false,
                 false, false, false]
 
 twist0_queue_size: 10
-twist0_rejection_threshold: 2
+#twist0_rejection_threshold: 2
 twist0_nodelay: false
 twist0_relative: false
 
@@ -86,19 +86,19 @@ twist1_config: [false, false, false,
                 false, false, false]
 
 twist1_queue_size: 10
-twist1_rejection_threshold: 2
+#twist1_rejection_threshold: 2
 twist1_nodelay: false
 twist1_relative: false
 
 imu0: imu/filtered
 imu0_config: [false, false, false,
-              true,  true,  true,
+              false,  false,  false,
               false, false, false,
               true,  true,  true,
               true,  true,  true]
 imu0_nodelay: false
 imu0_differential: false
-imu0_relative: true
+imu0_relative: false
 imu0_queue_size: 100
 imu0_pose_rejection_threshold: 0.8                 # Note the difference in parameter names
 imu0_twist_rejection_threshold: 0.8                #
@@ -129,9 +129,9 @@ control_timeout: 0.2
 # Which velocities are being controlled. Order is vx, vy, vz, vroll, vpitch, vyaw.
 control_config: [true, false, false, false, false, true]
 # Places limits on how large the acceleration term will be. Should match your robot's kinematics.
-acceleration_limits: [1.3, 1.3, .65, 3.4, 3.4, 3.4]
+acceleration_limits: [1.3, 0.0, 0.0, 0.0, 0.0, 3.4]
 # Acceleration and deceleration limits are not always the same for robots.
-deceleration_limits: [1.3, 1.3, .65, 3.4, 3.4, 4.5]
+deceleration_limits: [1.3, 0.0, 0.0, 0.0, 0.0, 4.5]
 # If your robot cannot instantaneously reach its acceleration limit, the permitted change can be controlled with these
 # gains
 acceleration_gains: [0.8, 0.0, 0.0, 0.0, 0.0, 0.9]

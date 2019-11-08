@@ -1,12 +1,14 @@
 <launch>
 
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
-    <rosparam command="load" file="$(find robot_localization)/params/A01-RaIner_2xradar_imu.yaml" />
+    <!-- <rosparam command="load" file="$(find robot_localization)/params/A01-RaIner_2xradar_imu_tera.yaml" /> -->
+    <rosparam command="load" file="$(find robot_localization)/params/A01-RaIner_2xradar_imu_tera.yaml" />
     <param name ="/use_sim_time" value="false"/>
     <!--  Placeholder for output topic remapping -->
     <remap from="imu/filtered" to="/imu_raw"/>
     <remap from="velocity/filtered" to="/mmWaveDataHdl/vel"/>
     <remap from="velocity1/filtered" to="/mmWaveDataHdl1/vel"/>
+    <remap from="odom/filtered" to="/z_state_estimator/odom"/>
   </node>
 
 </launch>
