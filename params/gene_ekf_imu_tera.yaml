@@ -68,7 +68,7 @@ world_frame: odom           # Defaults to the value of odom_frame if unspecified
 twist0: velocity/filtered
 twist0_config: [false, false, false,
                 false, false, false,
-                true,  true,  true,
+                false, false,  true,
                 false, false, false,
                 false, false, false]
 
@@ -77,29 +77,42 @@ twist0_rejection_threshold: 2
 twist0_nodelay: false
 twist0_relative: false
 
-twist1: velocity1/filtered
-twist1_config: [false, false, false,
-                false, false, false,
-                true,  true,  true,
-                false, false, false,
-                false, false, false]
 
-twist1_queue_size: 10
-twist1_rejection_threshold: 2
-twist1_nodelay: false
-twist1_relative: false
-
-twist2: velocity2/filtered
-twist2_config: [false, false, false,
-                false, false, false,
-                false, false,  true,
-                false, false, false,
-                false, false, false]
-
-twist2_queue_size: 10
-twist2_rejection_threshold: 2
-twist2_nodelay: false
-twist2_relative: false
+#twist0: velocity/filtered
+#twist0_config: [false, false, false,
+#                false, false, false,
+#                true,  true,  true,
+#                false, false, false,
+#                false, false, false]
+#
+#twist0_queue_size: 10
+#twist0_rejection_threshold: 2
+#twist0_nodelay: false
+#twist0_relative: false
+#
+#twist1: velocity1/filtered
+#twist1_config: [false, false, false,
+#                false, false, false,
+#                true,  true,  true,
+#                false, false, false,
+#                false, false, false]
+#
+#twist1_queue_size: 10
+#twist1_rejection_threshold: 2
+#twist1_nodelay: false
+#twist1_relative: false
+#
+#twist2: velocity2/filtered
+#twist2_config: [false, false, false,
+#                false, false, false,
+#                false, false,  true,
+#                false, false, false,
+#                false, false, false]
+#
+#twist2_queue_size: 10
+#twist2_rejection_threshold: 2
+#twist2_nodelay: false
+#twist2_relative: false
 
 imu0: imu/filtered
 imu0_config: [false, false, false,

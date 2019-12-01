@@ -30,7 +30,7 @@ print_diagnostics: false
 # Debug settings. Not for the faint of heart. Outputs a ludicrous amount of information to the file specified by
 # debug_out_file. I hope you like matrices! Please note that setting this to true will have strongly deleterious
 # effects on the performance of the node. Defaults to false if unspecified.
-debug: false
+debug: true
 
 # Defaults to "robot_localization_debug.txt" if unspecified. Please specify the full path.
 debug_out_file: /home/ohrad/rl_debug/file.txt
@@ -74,21 +74,21 @@ twist0_config: [false, false, false,
                 false, false, false]
 
 twist0_queue_size: 1
-twist0_rejection_threshold: 2
+#twist0_rejection_threshold: 2
 twist0_nodelay: false
 twist0_relative: false
 
-#twist1: velocity1/filtered
-#twist1_config: [false, false, false,
-#false, false, false,
-                #true,  true,  true,
-                #false, false, false,
-                #                false, false, false]
+twist1: velocity1/filtered
+twist1_config: [false, false, false,
+                false, false, false,
+                true,  true,  true,
+                false, false, false,
+                false, false, false]
 
-#twist1_queue_size: 10
+twist1_queue_size: 10
 #twist1_rejection_threshold: 2
-#twist1_nodelay: false
-#twist1_relative: false
+twist1_nodelay: false
+twist1_relative: false
 
 imu0: imu/filtered
 imu0_config: [false, false, false,
@@ -100,8 +100,8 @@ imu0_nodelay: false
 imu0_differential: false
 imu0_relative: true
 imu0_queue_size: 10
-imu0_pose_rejection_threshold: 0.8                 # Note the difference in parameter names
-imu0_twist_rejection_threshold: 0.8                #
+#imu0_pose_rejection_threshold: 0.8                 # Note the difference in parameter names
+#imu0_twist_rejection_threshold: 0.8                #
 imu0_linear_acceleration_rejection_threshold: 0.8  #
 
 # [ADVANCED] Some IMUs automatically remove acceleration due to gravity, and others don't. If yours doesn't, please set
